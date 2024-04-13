@@ -12,6 +12,10 @@ public class Main {
         firstUser.setAge(34);
 
         dao.saveUser(firstUser);
+        dao.changeUserAge("jan.kowalski@gmail.com", 35);
+        dao.deleteUser("jan.kowalski@gmail.com");
+
+//        System.out.println(dao.findUserByEmail("jan.kowalski@gmail.com"));
     }
 }
 
