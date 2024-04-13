@@ -2,6 +2,16 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+        UserDAO dao = new UserDAO();
+
+        User firstUser = new User();
+        firstUser.setName("Jan");
+        firstUser.setLastName("Kowalski");
+        firstUser.setEmail("jan.kowalski@gmail.com");
+        firstUser.setAge(34);
+
+        dao.saveUser(firstUser);
     }
 }
+
