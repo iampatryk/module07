@@ -2,6 +2,8 @@ package org.example;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "User_Table")
 public class User {
@@ -14,6 +16,10 @@ public class User {
     private String name;
     private String lastName;
     private Integer age;
+    @OneToOne
+    private Address address;
+    @OneToMany(mappedBy = "user")
+    private List<License> licenses;
 
     public User() {}
 
@@ -63,6 +69,22 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public List<License> getLicenses() {
+        return licenses;
+    }
+
+    public void setLicenses(List<License> licenses) {
+        this.licenses = licenses;
     }
 
     @Override

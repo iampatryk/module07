@@ -7,13 +7,25 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.List;
+
 public class UserDAO {
     private final SessionFactory sessionFactory = UserSessionFactory.getUserSessionFactory();
 
-    public void saveUser(User u) {
+    public void saveUser(User u, Address a, List<License> licenses) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
+        session.merge(a);
         session.merge(u);
+        transaction.commit();
+        saveLicenses(licenses);
+        session.close();
+    }
+
+    private void saveLicenses(List<License> licenses) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        licenses.forEach(session::merge);
         transaction.commit();
         session.close();
     }
